@@ -168,9 +168,9 @@ void Game::update() {
     ball.update();
 
     // Check collisions
-    ball.checkCollision(paddle.getRect());
+    ball.checkCollisionPaddle(paddle.getRect());
     for (auto& brick : bricks) {
-        if (ball.checkCollision(brick.getRect())) {
+        if (ball.checkCollisionBrick(brick.getRect())) {
             brick.destroyed = true;
         }
     }
