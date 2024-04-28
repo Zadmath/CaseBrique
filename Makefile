@@ -7,9 +7,9 @@ CC = g++
 # Options de compilation
 CFLAGS = -Wall -Wextra -std=c++17 -O2
 # Chemins d'inclusion pour les headers
-INCLUDES = -Iinclude -I/usr/include/SDL2
+INCLUDES = -Iinclude -I/usr/include/SDL2 -lSDL2_ttf
 # Options de lien
-LDFLAGS = -lSDL2
+LDFLAGS = -lSDL2 -lSDL2_ttf
 
 # Dossiers de sources et objets
 SRCDIR = src

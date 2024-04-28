@@ -1,6 +1,6 @@
 #include "Paddle.hpp"
 
-Paddle::Paddle() : rect{0, 0, 100, 20}, speed(10) {
+Paddle::Paddle() : rect{0, 0, 100, 20}, speed(4) {
 }
 
 void Paddle::init(int x, int y, int w, int h) {
@@ -12,6 +12,23 @@ void Paddle::init(int x, int y, int w, int h) {
 
 void Paddle::update() {
     const Uint8* keystates = SDL_GetKeyboardState(NULL);
+    int x, y;
+    SDL_GetMouseState(&x, &y);
+    //control with mouse
+    if (x>rect.w/2 && x<800-rect.w/2) {
+
+
+        
+        rect.x = x - rect.w / 2;
+        if (rect.x < 0) {
+            rect.x = 0;
+        }
+        if (rect.x > 800 - rect.w) {
+            rect.x = 800 - rect.w;
+        }
+    }
+    //control avec les fleches si la souris n'est pas utilisée
+
     if (keystates[SDL_SCANCODE_LEFT]) {
         rect.x -= speed;
         if (rect.x < 0) {
@@ -24,6 +41,8 @@ void Paddle::update() {
             rect.x = 800 - rect.w;
         }
     }
+
+
 }
 
 void Paddle::render(SDL_Renderer* renderer) {

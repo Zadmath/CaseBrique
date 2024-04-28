@@ -4,7 +4,7 @@
 class Ball {
 public:
     Ball();
-    void init(int x, int y, int radius, int speedX = 5, int speedY = 5);
+    void init(int x, int y, int radius, int speedX = 1, int speedY = 1);
     void update();
     void render(SDL_Renderer* renderer);
     bool checkCollision(const SDL_Rect& paddle);
