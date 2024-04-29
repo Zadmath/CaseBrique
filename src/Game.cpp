@@ -171,10 +171,9 @@ void Game::update() {
     ball.checkCollisionPaddle(paddle.getRect());
     for (auto& brick : bricks) {
         if (ball.checkCollisionBrick(brick.getRect())) {
-            brick.destroyed = true;
+            brick.checkCollision(ball.getRect());
         }
     }
-
     bricks.erase(std::remove_if(bricks.begin(), bricks.end(),
                                 [](const Brick& b) { return b.destroyed; }),
                  bricks.end());

@@ -6,11 +6,22 @@ Brick::Brick(int x, int y, int w, int h)
     rect.y = y;
     rect.w = w;
     rect.h = h;
+    state = BrickState::Green;
 }
 
 void Brick::render(SDL_Renderer* renderer) {
     if (!destroyed) {
-        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // Rouge
+        switch (state) {
+            case BrickState::Green:
+                SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255); // Green
+                break;
+            case BrickState::Yellow:
+                SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255); // Yellow
+                break;
+            case BrickState::Red:
+                SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // Red
+                break;
+        }
         SDL_RenderFillRect(renderer, &rect);
     }
 }
@@ -22,7 +33,14 @@ bool Brick::checkCollision(const SDL_Rect& ball) {
         ball.x < rect.x + rect.w &&
         ball.y + ball.h > rect.y &&
         ball.y < rect.y + rect.h) {
-        destroyed = true; // La brique est détruite lors de la collision
+        
+        if(state == BrickState::Green && !destroyed) { // Check if the brick is not already destroyed
+            state = BrickState::Yellow;
+        } else if(state == BrickState::Yellow && !destroyed) { // Check if the brick is not already destroyed
+            state = BrickState::Red;
+        } else {
+            destroyed = true;
+        }
         return true;
     }
     return false;

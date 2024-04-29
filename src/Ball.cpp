@@ -57,6 +57,7 @@ bool Ball::checkCollisionBrick(const SDL_Rect& brick) {
 
         // Si la balle touche le coin de la brique, on inverse les deux directions
         // Sinon, on inverse seulement la direction de la balle
+        
         if (std::abs(diffX) > std::abs(diffY)) {
             speedX = -speedX;
         } else {

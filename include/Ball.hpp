@@ -1,6 +1,6 @@
 #pragma once
 #include <SDL.h>
-const float maxSpeed = 1.4f;
+const float maxSpeed = 1.0f;
 class Ball {
 public:
     Ball();
